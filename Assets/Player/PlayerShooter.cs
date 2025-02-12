@@ -70,7 +70,6 @@ public class PlayerShooter : MonoBehaviour
         {
             if(powerChargeSlider.value >= minShootableSliderValue)
             {
-                Debug.Log(powerChargeSlider.value);
                 Shoot(ray.origin, ray.direction);
                 if (shootingChargeCoroutine != null)
                 {
