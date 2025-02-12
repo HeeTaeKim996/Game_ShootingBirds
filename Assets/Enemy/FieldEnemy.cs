@@ -4,5 +4,8 @@ using UnityEngine;
 
 public abstract class FieldEnemy : Enemy
 {
-
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 }

@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began && WhetherRectContainsTouchPosition(touch.position, playerRotationSwitchButton))
             {
-                GameManager.instance.OnRotationSwitchButtonClicekd();
+                playerShooter.playerMovement.OnRotationSwitchButtonClicekd();
             }
         }
     }

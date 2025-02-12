@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class FieldEnemySpawner_South : MonoBehaviour
+public class FieldEnemySpawner_South : FieldEnemySpawner
 {
     private GameManager gameManager;
     public Enemy enemyPrefab;
@@ -21,22 +21,31 @@ public class FieldEnemySpawner_South : MonoBehaviour
 
     
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         gameManager = GetComponentInParent<GameManager>();
     }
     private void Start()
     {
-        if(instantiateCoroutine != null)
+    }
+    protected override void OnGameOver()
+    {
+        base.OnGameOver();
+        if (instantiateCoroutine != null)
+        {
+            StopCoroutine(instantiateCoroutine);
+            instantiateCoroutine = null;
+        }
+    }
+    protected override void OnRestartGame()
+    {
+        base.OnRestartGame();
+        if (instantiateCoroutine != null)
         {
             StopCoroutine(instantiateCoroutine);
         }
         instantiateCoroutine = StartCoroutine(InstantiateEnemy());
-    }
-
-    private void Update()
-    {
-        
     }
 
     private IEnumerator InstantiateEnemy()

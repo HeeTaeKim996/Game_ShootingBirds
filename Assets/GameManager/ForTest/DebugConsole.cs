@@ -17,7 +17,7 @@ public class DebugConsole : MonoBehaviour
     {
         liveStrings.Add(logString);
 
-        RemoveStringAfterTime(logString);
+        StartCoroutine(RemoveStringAfterTime(logString));
         if(liveStrings.Count > 10)
         {
             liveStrings.RemoveAt(0);

@@ -21,8 +21,9 @@ public class FieldEnemy_GrayMan : FieldEnemy
     private const string Attack_SwingCross = "Attack_SwingCross";
     private const string Attack_Stab = "Attack_Stab";
     
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         enemyRigidbody = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemyAnimator = GetComponent<Animator>();

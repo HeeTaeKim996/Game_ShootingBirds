@@ -24,4 +24,18 @@ public abstract class Enemy : MonoBehaviour
     {
         Debug.Log($"{name} - {damageRatio} - {layerInt} - {uniScaleTransform.gameObject.name}");
     }
+
+    protected virtual void Awake()
+    {
+        GameManager.instance.gameOverManager.restartGameEvent += OnRestartGame;
+    }
+
+    protected virtual void OnRestartGame()
+    {
+        Destroy(gameObject);
+    }
+    protected virtual void OnDestroy()
+    {
+        GameManager.instance.gameOverManager.restartGameEvent -= OnRestartGame;
+    }
 }
