@@ -10,4 +10,9 @@ public static class CommonMethods
 
         return firstPivot + Mathf.Clamp(Vector3.Dot(point - firstPivot, directionNormalized), 0, direction.magnitude) * directionNormalized;
     }
+
+    public static string StageLevelToString(int stageInt)
+    {
+        return $"{(int)stageInt / 1_000} - {stageInt - (((int)stageInt / 1000) * 1000)}";
+    }
 }

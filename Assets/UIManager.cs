@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     public Text timeText;
     private float elapsedTime = 0;
     private Coroutine elapsedTimeCheckCoroutine;
+    public HubSelectPanel hubSelectPanel { get; private set; }
+    public StageResultPanel stageResultPanel { get; private set; }
 
     private int score = 0;
     public Text scoreText;
@@ -25,6 +27,7 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        hubSelectPanel = GetComponentInChildren<HubSelectPanel>();
     }
 
     private void Start()

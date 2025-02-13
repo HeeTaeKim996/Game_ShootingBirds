@@ -14,7 +14,6 @@ public class PlayerShooter : MonoBehaviour
     public Transform shootTransform;
 
     private ShooterState shooterState;
-    public bool isGameover { get; private set; }
 
     private const float minShootableSliderValue = 40f;
     private bool isEarlyShooted;
@@ -28,8 +27,6 @@ public class PlayerShooter : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         sliderCanvasGroup = powerChargeSlider.GetComponent<CanvasGroup>();
-        GameManager.instance.gameOverManager.restartGameEvent += OnRestartGame;
-        GameManager.instance.gameOverManager.gameOverEvent += OnGameOver;
     }
 
     private void Start()
@@ -43,8 +40,7 @@ public class PlayerShooter : MonoBehaviour
 
     public void GetShooterVector(Vector2 touchPosition)
     {
-        if (!isGameover)
-        {
+
             Ray ray = Camera.main.ScreenPointToRay(touchPosition);
             #region 공부정리
             /* 예전에 내가 사용한 멍슈팅에서의 Ray 는, Ray ray = new Ray( (Vector3)rayStartPosition, (Vector3)rayDirection)); 으로 Ray를 쐈었는데,
@@ -99,7 +95,7 @@ public class PlayerShooter : MonoBehaviour
                     reloadReserveCoroutine = null;
                 }
             }
-        }
+        
     }
 
     private void Shoot(Vector3 origin, Vector3 direction)
@@ -126,8 +122,7 @@ public class PlayerShooter : MonoBehaviour
 
     public void GetShooingCharge()
     {
-        if (!isGameover)
-        {
+
             if (shooterState == ShooterState.Normal)
             {
                 if (shootingChargeCoroutine != null)
@@ -144,7 +139,7 @@ public class PlayerShooter : MonoBehaviour
                 }
                 reloadReserveCoroutine = StartCoroutine(ReloadReserveCoroutine());
             }
-        }
+        
     }
     private IEnumerator ReloadReserveCoroutine()
     {
@@ -181,15 +176,4 @@ public class PlayerShooter : MonoBehaviour
         Shoot(reservedOrigin, reservedDirection);
         shootingChargeCoroutine = null;
     }
-
-    public void OnRestartGame()
-    {
-        isGameover = false;
-    }
-    public void OnGameOver()
-    {
-        isGameover = true;
-    }
-
-
 }

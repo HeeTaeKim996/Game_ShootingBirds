@@ -27,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnRotationSwitchButtonClicekd()
     {
-        if (playerShooter.isGameover) return;
-
         if (playerRoationInt == 0)
         {
             if (playerRotationCoroutine != null)

@@ -19,6 +19,13 @@ public abstract class Enemy : MonoBehaviour
     public Transform LowPivot;
     public Transform highPivot;
     public float arrowSpawnDistance { get; protected set;}
+    private FieldEnemySpawner spawner;
+
+    public virtual void GetSpawnerInfo(FieldEnemySpawner spawner)
+    {
+        this.spawner = spawner;
+        this.spawner.checkOnFieldEnemyEvent += checkOnFieldEnemy;
+    }
 
     public void ForTestMethod_CheckHurtColliders(float damageRatio, int layerInt, Transform uniScaleTransform)
     {
@@ -27,15 +34,22 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Awake()
     {
-        GameManager.instance.gameOverManager.restartGameEvent += OnRestartGame;
+        GameManager.instance.resetFieldEvent += OnResetField;
     }
 
-    protected virtual void OnRestartGame()
+    protected virtual void OnResetField()
     {
         Destroy(gameObject);
     }
     protected virtual void OnDestroy()
     {
-        GameManager.instance.gameOverManager.restartGameEvent -= OnRestartGame;
+        GameManager.instance.resetFieldEvent -= OnResetField;
+        this.spawner.checkOnFieldEnemyEvent -= checkOnFieldEnemy;
+        spawner.onFieldEnemies.Remove(this);
+    }
+
+    public virtual void checkOnFieldEnemy()
+    {
+        spawner.onFieldEnemies.Add(this);
     }
 }

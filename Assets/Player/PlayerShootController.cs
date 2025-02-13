@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerShootController : MonoBehaviour
 {
     private PlayerShooter playerShooter;
 
@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerShooter = FindObjectOfType<PlayerShooter>();
-
     }
 
     private void Update()

@@ -27,7 +27,7 @@ public class Enemy_HurtBox : MonoBehaviour
         if(enemy != null)
         {
             enemy.GetDamage(damage * damageRatio);
-            Debug.Log($"{uniScaleTransform.gameObject.name} - {damage * damageRatio}");
+            //Debug.Log($"{uniScaleTransform.gameObject.name} - {damage * damageRatio}");
         }
         else
         {
